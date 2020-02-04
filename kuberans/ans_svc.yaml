@@ -1,0 +1,8 @@
+---
+- name: create service for deployment
+  hosts: manager
+  user: root
+
+  tasks:
+  - name: create a service
+    command: kubectl apply -f /opt/kuber/kube-svc.yml 

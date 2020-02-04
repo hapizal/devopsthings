@@ -1,0 +1,19 @@
+---
+- hosts : manager
+  user : root
+  
+  tasks:
+  - name: create docker image using war file
+    command: docker build -t tomimage:latest .
+    args:
+      chdir: /opt/kuber
+
+  - name: create tag to image
+    command: docker tag tomimage hapizal/tomimage
+
+  - name: push image on to dockerhub
+    command: docker push hapizal/tomimage
+
+  - name: remove docker images form ansible server
+    command: docker rmi tomimage:latest hapizal/tomimage
+    ignore_errors: yes 
